@@ -7,3 +7,7 @@ An open instant messaging client with mSIM support. Written by Solkin.
 Just type:
 
     ant jar
+    
+To run:
+
+    ant run
