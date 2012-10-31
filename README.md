@@ -1,4 +1,4 @@
-# OpenIM [![Build Status](https://secure.travis-ci.org/m1kc/openim.png)](http://travis-ci.org/m1kc/openim)
+# OpenIM [![Build Status](https://secure.travis-ci.org/solkin/openim.png)](http://travis-ci.org/solkin/openim)
 
 An open instant messaging client with mSIM support. Written by Solkin.
 
@@ -7,3 +7,7 @@ An open instant messaging client with mSIM support. Written by Solkin.
 Just type:
 
     ant jar
+    
+To run:
+
+    ant run
