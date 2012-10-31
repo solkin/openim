@@ -89,8 +89,12 @@ public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNod
   public abstract int getRegisterStepsCount();
 
   public abstract String[][] getRegisterFields(int stepIndex) throws IOException;
+  
+  public abstract String[][] getLoginFields();
 
   public abstract void setRegisterStepFields(int stepIndex, String[][] params) throws IOException, InvalidFormException;
+  
+  public abstract void setLoginStepFields(String[][] params);
 
   /** Queue stack **/
   public abstract void pushQueue(QueueAction queueAction);

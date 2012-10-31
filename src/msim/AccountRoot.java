@@ -180,6 +180,18 @@ public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
     params[5] = new String[]{ "field", "112" };
     return params;
   }
+  
+  @Override
+  public String[][] getLoginFields() {
+    String[][] params = new String[ 6 ][ 2 ];
+    params[0] = new String[]{ "label", "¬ведите сервер, где зарегистрирована yчЄтна€ запись:" };
+    params[1] = new String[]{ "field", "localhost" };
+    params[2] = new String[]{ "label", "¬ведите ник:" };
+    params[3] = new String[]{ "field", "Someone" };
+    params[4] = new String[]{ "label", "¬ведите пароль:" };
+    params[5] = new String[]{ "field", "112" };
+    return params;
+  }
 
   @Override
   public int getRegisterStepsCount() {
@@ -197,6 +209,12 @@ public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
     if ( !( packet.type.equals( PacketType.TYPE_SUCCESS ) && packet.content.equals( PacketType.OPER_REGISTER ) ) ) {
       throw new InvalidFormException();
     }
+  }
+  
+  public void setLoginStepFields(String[][] params) {
+    host = params[1][1];
+    login = params[3][1];
+    password = params[5][1];
   }
 
   @Override
