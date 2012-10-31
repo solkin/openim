@@ -175,7 +175,7 @@ public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
     params[0] = new String[]{ "label", "¬ведите сервер дл€ регистрации:" };
     params[1] = new String[]{ "field", "localhost" };
     params[2] = new String[]{ "label", "¬ведите желаемый ник:" };
-    params[3] = new String[]{ "field", "Someone" };
+    params[3] = new String[]{ "field", System.getProperty( "user.name" ) };
     params[4] = new String[]{ "label", "¬ведите желаемый пароль:" };
     params[5] = new String[]{ "field", "112" };
     return params;
@@ -187,7 +187,7 @@ public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
     params[0] = new String[]{ "label", "¬ведите сервер, где зарегистрирована yчЄтна€ запись:" };
     params[1] = new String[]{ "field", "localhost" };
     params[2] = new String[]{ "label", "¬ведите ник:" };
-    params[3] = new String[]{ "field", "Someone" };
+    params[3] = new String[]{ "field", System.getProperty( "user.name" ) };
     params[4] = new String[]{ "label", "¬ведите пароль:" };
     params[5] = new String[]{ "field", "112" };
     return params;
