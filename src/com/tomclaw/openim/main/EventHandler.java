@@ -1,7 +1,7 @@
 package com.tomclaw.openim.main;
 
-import java.util.Hashtable;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -26,16 +26,16 @@ public class EventHandler implements Handler {
   }
 
   @Override
-  public void receiveBuddyList(AccountRoot accountRoot, Vector<GroupItem> items) {
+  public void receiveBuddyList(AccountRoot accountRoot, ArrayList<GroupItem> items) {
     accountRoot.removeAllChildren();
     for ( int c = 0; c < items.size(); c++ ) {
-      accountRoot.add( items.elementAt( c ) );
+      accountRoot.add( items.get( c ) );
     }
     OpenIM.mainFrame.updateBuddyList();
   }
   
   @Override
-  public void operationSuccess(AccountRoot accountRoot, Cookie cookie, Hashtable params) {
+  public void operationSuccess(AccountRoot accountRoot, Cookie cookie, HashMap params) {
     accountRoot.runQueue( cookie, params );
   }
   

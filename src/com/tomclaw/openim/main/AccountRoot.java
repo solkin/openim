@@ -3,8 +3,7 @@ package com.tomclaw.openim.main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Hashtable;
-import java.util.Vector;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenuItem;
@@ -59,9 +58,9 @@ public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNod
   public abstract String getHostPort();
 
   /** Serializing **/
-  public abstract void setParams(Hashtable params);
+  public abstract void setParams(HashMap params);
 
-  public abstract Hashtable getParams();
+  public abstract HashMap getParams();
 
   /** Actions **/
   public abstract GroupItem getGroupInstance(String groupName);
@@ -99,7 +98,7 @@ public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNod
   /** Queue stack **/
   public abstract void pushQueue(QueueAction queueAction);
 
-  public abstract void runQueue(Cookie cookie, Hashtable params);
+  public abstract void runQueue(Cookie cookie, HashMap params);
 
   public abstract QueueAction popQueue(Cookie cookie);
 
@@ -162,7 +161,7 @@ public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNod
               QueueAction action = new QueueAction( AccountRoot.this, OpenIM.mainFrame.selectedBuddyItem, cookie ) {
 
                 @Override
-                public void actionPerformed(Hashtable params) {
+                public void actionPerformed(HashMap params) {
                   System.out.println( "Removing buddy" );
                   GroupItem groupItem = OpenIM.mainFrame.selectedBuddyItem.getParentGroup();
                   groupItem.remove( OpenIM.mainFrame.selectedBuddyItem );
@@ -191,7 +190,7 @@ public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNod
               QueueAction action = new QueueAction( AccountRoot.this, OpenIM.mainFrame.selectedBuddyItem, cookie ) {
 
                 @Override
-                public void actionPerformed(Hashtable params) {
+                public void actionPerformed(HashMap params) {
                   System.out.println( "Renaming buddy" );
                   OpenIM.mainFrame.selectedBuddyItem.setNickName( result );
                   OpenIM.mainFrame.updateBuddyList();
@@ -225,7 +224,7 @@ public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNod
               QueueAction action = new QueueAction( AccountRoot.this, OpenIM.mainFrame.selectedGroupItem, cookie ) {
 
                 @Override
-                public void actionPerformed(Hashtable params) {
+                public void actionPerformed(HashMap params) {
                   System.out.println( "Removing buddy" );
                   remove( OpenIM.mainFrame.selectedGroupItem );
                   OpenIM.mainFrame.updateBuddyList();
@@ -254,7 +253,7 @@ public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNod
               QueueAction action = new QueueAction( AccountRoot.this, OpenIM.mainFrame.selectedGroupItem, cookie ) {
 
                 @Override
-                public void actionPerformed(Hashtable params) {
+                public void actionPerformed(HashMap params) {
                   System.out.println( "Renaming group" );
                   OpenIM.mainFrame.selectedGroupItem.setGroupName( result );
                   OpenIM.mainFrame.updateBuddyList();

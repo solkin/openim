@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.tomclaw.openim.main;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  *
@@ -61,7 +57,7 @@ public class QueueAction {
         return cookie;
     }
 
-    public void actionPerformed(Hashtable params) {
+    public void actionPerformed(HashMap params) {
         // Empty method, will be overwritten 
     }
 }

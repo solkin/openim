@@ -2,7 +2,7 @@ package msim;
 
 import com.tomclaw.openim.main.*;
 import java.io.IOException;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 /**
  *
@@ -33,7 +33,7 @@ public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
   }
   
   @Override
-  public void setParams(Hashtable params) {
+  public void setParams(HashMap params) {
     login = ( String ) ( params.get( "login" ) );
     password = ( String ) params.get( "password" );
     host = ( String ) params.get( "host" );
@@ -41,8 +41,8 @@ public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
   }
 
   @Override
-  public Hashtable getParams() {
-    Hashtable hashtable = new Hashtable();
+  public HashMap getParams() {
+    HashMap hashtable = new HashMap();
     hashtable.put( "login", login );
     hashtable.put( "password", password );
     hashtable.put( "host", host );
@@ -223,7 +223,7 @@ public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
   }
 
   @Override
-  public void runQueue(Cookie cookie, Hashtable params) {
+  public void runQueue(Cookie cookie, HashMap params) {
     queue.runQueueAction( cookie, params );
   }
 

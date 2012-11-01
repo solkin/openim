@@ -5,11 +5,7 @@
 package com.tomclaw.openim.main;
 
 import com.tomclaw.bingear.BinGear;
-import com.tomclaw.bingear.GroupNotFoundException;
-import com.tomclaw.bingear.IncorrectValueException;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -43,6 +39,7 @@ public class Storage {
             file = new File(appFolder + settingsFile);
             if (!file.exists()) {
                 file.createNewFile();
+                /** Loading default file **/
                 BinGear settings_def = new BinGear();
                 settings_def.importFromIni(new java.io.DataInputStream(
                         Class.class.getResourceAsStream("/res/".concat(

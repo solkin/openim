@@ -1,16 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.tomclaw.openim.main;
 
-import java.awt.event.*;
 import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Vector;
-import javax.swing.JPopupMenu;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
@@ -21,7 +15,7 @@ public class MainFrame extends javax.swing.JFrame {
 
   private DefaultMutableTreeNode rootNode;
   private javax.swing.tree.DefaultTreeModel model;
-  public Vector<AccountRoot> accountRoots = new Vector();
+  public ArrayList<AccountRoot> accountRoots = new ArrayList();
   public EventHandler handler;
   public BuddyItem selectedBuddyItem;
   public GroupItem selectedGroupItem;
@@ -36,14 +30,14 @@ public class MainFrame extends javax.swing.JFrame {
   public void loadAccounts() {
     rootNode = new DefaultMutableTreeNode( "Accounts" );
     model = new javax.swing.tree.DefaultTreeModel( rootNode );
-    accountRoots.removeAllElements();
+    accountRoots.clear();
     String[] groups = Storage.accounts.listGroups();
     for ( int c = 0; c < groups.length; c++ ) {
       try {
         String type = Storage.accounts.getValue( groups[c], "type" );
         AccountRoot accountRoot = ( AccountRoot ) Class.forName( type.concat( ".AccountRoot" ) ).newInstance();
         StatusUtil statusUtil = accountRoot.getStatusUtil();
-        Hashtable params = new Hashtable();
+        HashMap params = new HashMap();
         String[] values = Storage.accounts.listItems( groups[c] );
         for ( int i = 0; i < values.length; i++ ) {
           params.put( values[i], Storage.accounts.getValue( groups[c], values[i] ) );
@@ -55,7 +49,7 @@ public class MainFrame extends javax.swing.JFrame {
         accountRoot.initBuddyPopup();
         accountRoot.initGroupPopup();
         statusBar.add( statusButton );
-        accountRoots.addElement( accountRoot );
+        accountRoots.add( accountRoot );
         rootNode.add( accountRoot );
       } catch ( Throwable ex ) {
         ex.printStackTrace();
@@ -70,12 +64,13 @@ public class MainFrame extends javax.swing.JFrame {
     try {
       String groupName = String.valueOf( System.currentTimeMillis() );
       StatusUtil statusUtil = accountRoot.getStatusUtil();
-      Hashtable params = accountRoot.getParams();
-      Enumeration keys = params.keys();
+      HashMap params = accountRoot.getParams();
+      Iterator keys = (params.keySet()).iterator();
+      
       Storage.accounts.addGroup( groupName );
       Storage.accounts.addItem( groupName, "type", accountRoot.getType() );
-      for ( ; keys.hasMoreElements(); ) {
-        String itemName = ( String ) keys.nextElement();
+      for ( ; keys.hasNext(); ) {
+        String itemName = ( String ) keys.next();
         String value = ( String ) params.get( itemName );
         Storage.accounts.addItem( groupName, itemName, value );
       }
@@ -87,7 +82,7 @@ public class MainFrame extends javax.swing.JFrame {
       accountRoot.initBuddyPopup();
       accountRoot.initGroupPopup();
       statusBar.add( statusButton );
-      accountRoots.addElement( accountRoot );
+      accountRoots.add( accountRoot );
       rootNode.add( accountRoot );
       updateBuddyList();
       updateStatusBar();

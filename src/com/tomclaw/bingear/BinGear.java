@@ -3,8 +3,8 @@ package com.tomclaw.bingear;
 import com.tomclaw.utils.ArrayUtil;
 import com.tomclaw.utils.StringUtil;
 import java.io.*;
-import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Solkin Igor Viktorovich, TomClaw Software, 2003-2012
@@ -13,17 +13,17 @@ import java.util.Hashtable;
  */
 public class BinGear {
 
-  public Hashtable hashtable;
+  public HashMap hashtable;
 
   public BinGear() {
-    hashtable = new Hashtable();
+    hashtable = new HashMap();
   }
 
   public void addGroup(String groupName) throws IncorrectValueException {
     if ( groupName == null ) {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
-    hashtable.put( groupName, new Hashtable() );
+    hashtable.put( groupName, new HashMap() );
   }
 
   public void addItem(String groupName, String itemName, String value) throws GroupNotFoundException, IncorrectValueException {
@@ -31,18 +31,18 @@ public class BinGear {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
     try {
-      ( ( Hashtable ) hashtable.get( groupName ) ).put( itemName, value );
+      ( ( HashMap ) hashtable.get( groupName ) ).put( itemName, value );
     } catch ( NullPointerException ex1 ) {
       throw new GroupNotFoundException( groupName.concat( " is not exist" ) );
     }
   }
 
-  public Hashtable getGroup(String groupName) throws IncorrectValueException, GroupNotFoundException {
+  public HashMap getGroup(String groupName) throws IncorrectValueException, GroupNotFoundException {
     if ( groupName == null ) {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
     try {
-      return ( Hashtable ) hashtable.get( groupName );
+      return ( HashMap ) hashtable.get( groupName );
     } catch ( NullPointerException ex1 ) {
       throw new GroupNotFoundException( groupName.concat( " is not exist" ) );
     }
@@ -53,7 +53,7 @@ public class BinGear {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
     try {
-      return ( String ) ( ( Hashtable ) hashtable.get( groupName ) ).get( itemName );
+      return ( String ) ( ( HashMap ) hashtable.get( groupName ) ).get( itemName );
     } catch ( NullPointerException ex1 ) {
       throw new GroupNotFoundException( groupName.concat( " is not exist" ) );
     }
@@ -67,12 +67,12 @@ public class BinGear {
       return getValue( groupName, itemName );
     } else {
       try {
-        Enumeration groupKeys = hashtable.keys();
+        Iterator groupKeys = (hashtable.keySet()).iterator();
         String tempName;
-        for ( ; groupKeys.hasMoreElements(); ) {
-          tempName = ( String ) groupKeys.nextElement();
+        for ( ; groupKeys.hasNext(); ) {
+          tempName = ( String ) groupKeys.next();
           if ( tempName.startsWith( groupName ) || groupName.startsWith( tempName ) ) {
-            return ( String ) ( ( Hashtable ) hashtable.get( tempName ) ).get( itemName );
+            return ( String ) ( ( HashMap ) hashtable.get( tempName ) ).get( itemName );
           }
         }
       } catch ( NullPointerException ex1 ) {
@@ -96,10 +96,10 @@ public class BinGear {
 
   public String[] listGroups() {
     String[] groups = new String[ hashtable.size() ];
-    Enumeration groupKeys = hashtable.keys();
+    Iterator groupKeys = (hashtable.keySet()).iterator();
     String groupName;
-    for ( int c = 0; groupKeys.hasMoreElements(); c++ ) {
-      groupName = ( String ) groupKeys.nextElement();
+    for ( int c = 0; groupKeys.hasNext(); c++ ) {
+      groupName = ( String ) groupKeys.next();
       groups[c] = groupName;
     }
     return groups;
@@ -110,10 +110,10 @@ public class BinGear {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
     try {
-      String[] items = new String[ ( ( Hashtable ) hashtable.get( groupName ) ).size() ];
-      Enumeration itemKeys = ( ( Hashtable ) hashtable.get( groupName ) ).keys();
-      for ( int c = 0; itemKeys.hasMoreElements(); c++ ) {
-        groupName = ( String ) itemKeys.nextElement();
+      String[] items = new String[ ( ( HashMap ) hashtable.get( groupName ) ).size() ];
+      Iterator itemKeys = (( ( HashMap ) hashtable.get( groupName ) ).keySet()).iterator();
+      for ( int c = 0; itemKeys.hasNext(); c++ ) {
+        groupName = ( String ) itemKeys.next();
         items[c] = groupName;
       }
       return items;
@@ -130,15 +130,15 @@ public class BinGear {
       return listItems( groupName );
     } else {
       try {
-        Enumeration groupKeys = hashtable.keys();
+        Iterator groupKeys = hashtable.keySet().iterator();
         String tempName;
-        for ( ; groupKeys.hasMoreElements(); ) {
-          tempName = ( String ) groupKeys.nextElement();
+        for ( ; groupKeys.hasNext(); ) {
+          tempName = ( String ) groupKeys.next();
           if ( tempName.startsWith( groupName ) || groupName.startsWith( tempName ) ) {
-            String[] items = new String[ ( ( Hashtable ) hashtable.get( tempName ) ).size() ];
-            Enumeration itemKeys = ( ( Hashtable ) hashtable.get( tempName ) ).keys();
-            for ( int c = 0; itemKeys.hasMoreElements(); c++ ) {
-              items[c] = ( String ) itemKeys.nextElement();
+            String[] items = new String[ ( ( HashMap ) hashtable.get( tempName ) ).size() ];
+            Iterator itemKeys = ( ( HashMap ) hashtable.get( tempName ) ).keySet().iterator();
+            for ( int c = 0; itemKeys.hasNext(); c++ ) {
+              items[c] = ( String ) itemKeys.next();
             }
             return items;
           }
@@ -155,8 +155,8 @@ public class BinGear {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
     try {
-      ( ( Hashtable ) hashtable.get( groupName ) ).put( itemNewName, ( ( Hashtable ) hashtable.get( groupName ) ).get( itemOldName ) );
-      ( ( Hashtable ) hashtable.get( groupName ) ).remove( itemOldName );
+      ( ( HashMap ) hashtable.get( groupName ) ).put( itemNewName, ( ( HashMap ) hashtable.get( groupName ) ).get( itemOldName ) );
+      ( ( HashMap ) hashtable.get( groupName ) ).remove( itemOldName );
     } catch ( NullPointerException ex1 ) {
       throw new GroupNotFoundException( groupName.concat( " is not exist" ) );
     }
@@ -167,7 +167,7 @@ public class BinGear {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
     try {
-      ( ( Hashtable ) hashtable.get( groupName ) ).put( itemName, value );
+      ( ( HashMap ) hashtable.get( groupName ) ).put( itemName, value );
     } catch ( NullPointerException ex1 ) {
       throw new GroupNotFoundException( groupName.concat( " is not exist" ) );
     }
@@ -178,21 +178,23 @@ public class BinGear {
   }
 
   public void removeItem(String groupName, String itemName) {
-    ( ( Hashtable ) hashtable.get( groupName ) ).remove( itemName );
+    ( ( HashMap ) hashtable.get( groupName ) ).remove( itemName );
   }
 
   public void exportToIni(OutputStream outputStream) throws IOException {
-    Enumeration groupKeys = hashtable.keys();
-    Enumeration itemKeys;
+    Iterator groupKeys = hashtable.keySet().iterator();
+    Iterator itemKeys;
     String itemName;
     String groupName;
-    for ( ; groupKeys.hasMoreElements(); ) {
-      groupName = ( String ) groupKeys.nextElement();
+    for ( ; groupKeys.hasNext(); ) {
+      groupName = ( String ) groupKeys.next();
       outputStream.write( StringUtil.stringToByteArray( "[".concat( groupName ).concat( "]\n" ), true ) );
-      itemKeys = ( ( Hashtable ) hashtable.get( groupName ) ).keys();
-      for ( ; itemKeys.hasMoreElements(); ) {
-        itemName = ( String ) itemKeys.nextElement();
-        outputStream.write( StringUtil.stringToByteArray( itemName.concat( "=" ).concat( ( String ) ( ( Hashtable ) hashtable.get( groupName ) ).get( itemName ) ).concat( "\n" ), true ) );
+      itemKeys = ( ( HashMap ) hashtable.get( groupName ) ).keySet().iterator();
+      for ( ; itemKeys.hasNext(); ) {
+        itemName = ( String ) itemKeys.next();
+        outputStream.write( StringUtil.stringToByteArray( itemName.concat( 
+                "=" ).concat( ( String ) ( ( HashMap ) hashtable.get( 
+                groupName ) ).get( itemName ) ).concat( "\n" ), true ) );
       }
     }
     outputStream.flush();
@@ -213,29 +215,29 @@ public class BinGear {
      * L ----
      * ...
      */
-    Enumeration groupKeys = hashtable.keys();
-    Enumeration itemKeys;
+    Iterator groupKeys = hashtable.keySet().iterator();
+    Iterator itemKeys;
     String itemName;
     String groupName;
     String value;
     /** Groups count **/
     outputStream.writeChar( hashtable.size() );
-    for ( ; groupKeys.hasMoreElements(); ) {
-      groupName = ( String ) groupKeys.nextElement();
+    for ( ; groupKeys.hasNext(); ) {
+      groupName = ( String ) groupKeys.next();
       /** Group name length **/
       //outputStream.writeChar(groupName.length());
       /** Group name **/
       outputStream.writeUTF( groupName );
-      itemKeys = ( ( Hashtable ) hashtable.get( groupName ) ).keys();
+      itemKeys = ( ( HashMap ) hashtable.get( groupName ) ).keySet().iterator();
       /** Items count **/
-      outputStream.writeChar( ( ( Hashtable ) hashtable.get( groupName ) ).size() );
-      for ( ; itemKeys.hasMoreElements(); ) {
-        itemName = ( String ) itemKeys.nextElement();
+      outputStream.writeChar( ( ( HashMap ) hashtable.get( groupName ) ).size() );
+      for ( ; itemKeys.hasNext(); ) {
+        itemName = ( String ) itemKeys.next();
         /** Item name length **/
         //outputStream.writeChar(itemName.length());
         /** Item name **/
         outputStream.writeUTF( itemName );
-        value = ( String ) ( ( Hashtable ) hashtable.get( groupName ) ).get( itemName );
+        value = ( String ) ( ( HashMap ) hashtable.get( groupName ) ).get( itemName );
         /** Value length **/
         //outputStream.writeChar(value.length());
         /** Value **/

@@ -6,6 +6,7 @@ import com.tomclaw.openim.main.Cookie;
 import com.tomclaw.openim.main.GroupItem;
 import com.tomclaw.openim.main.Handler;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -99,7 +100,7 @@ public class Session {
                 binGear.importFromIni(packet.content);
             } catch (Throwable ex) {
             }
-            Vector<GroupItem> items = new Vector();
+            ArrayList<GroupItem> items = new ArrayList();
             String[] groupItems = binGear.listGroups();
             for (int c = 0; c < groupItems.length; c++) {
                 GroupItem groupItem = new msim.GroupItem(groupItems[c]);
@@ -112,7 +113,7 @@ public class Session {
                         buddyItem.setParentGroup(groupItem);
                         groupItem.addItem(buddyItem);
                     }
-                    items.addElement(groupItem);
+                    items.add(groupItem);
                 } catch (Throwable ex) {
                 }
             }

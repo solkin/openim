@@ -1,14 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package msim;
 
 import com.tomclaw.openim.main.Cookie;
 import com.tomclaw.openim.main.QueueAction;
-import com.tomclaw.utils.LogUtil;
-import java.util.Hashtable;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -16,10 +11,10 @@ import java.util.Vector;
  */
 public class Queue {
 
-  private static Vector actions = new Vector();
+  private static ArrayList actions = new ArrayList();
 
   public void pushQueueAction(QueueAction action) {
-    actions.addElement( action );
+    actions.add( action );
   }
 
   public QueueAction popQueueAction(Cookie cookie) {
@@ -27,7 +22,7 @@ public class Queue {
 
     QueueAction queueAction;
     for ( int c = 0; c < actions.size(); c++ ) {
-      queueAction = ( QueueAction ) actions.elementAt( c );
+      queueAction = ( QueueAction ) actions.get( c );
       if ( queueAction != null ) {
         if ( queueAction.cookie.cookieString.equals( cookie.cookieString ) ) {
           System.out.println( "QueueAction found!" );
@@ -39,10 +34,10 @@ public class Queue {
     return null;
   }
 
-  public void runQueueAction(Cookie cookie, Hashtable params) {
+  public void runQueueAction(Cookie cookie, HashMap params) {
     QueueAction queueAction;
     for ( int c = 0; c < actions.size(); c++ ) {
-      queueAction = ( QueueAction ) actions.elementAt( c );
+      queueAction = ( QueueAction ) actions.get( c );
       if ( queueAction != null ) {
         if ( queueAction.cookie.cookieString.equals( cookie.cookieString ) ) {
           System.out.println( "QueueAction found!" );
