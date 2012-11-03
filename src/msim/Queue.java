@@ -2,7 +2,7 @@ package msim;
 
 import com.tomclaw.openim.main.Cookie;
 import com.tomclaw.openim.main.QueueAction;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.HashMap;
 
 /**
@@ -11,7 +11,7 @@ import java.util.HashMap;
  */
 public class Queue {
 
-  private static ArrayList actions = new ArrayList();
+  private static LinkedList<QueueAction> actions = new LinkedList<QueueAction>();
 
   public void pushQueueAction(QueueAction action) {
     actions.add( action );
@@ -20,9 +20,7 @@ public class Queue {
   public QueueAction popQueueAction(Cookie cookie) {
     System.out.println( "Actions count: " + actions.size() );
 
-    QueueAction queueAction;
-    for ( int c = 0; c < actions.size(); c++ ) {
-      queueAction = ( QueueAction ) actions.get( c );
+    for ( QueueAction queueAction : actions ) {
       if ( queueAction != null ) {
         if ( queueAction.cookie.cookieString.equals( cookie.cookieString ) ) {
           System.out.println( "QueueAction found!" );
@@ -35,9 +33,7 @@ public class Queue {
   }
 
   public void runQueueAction(Cookie cookie, HashMap params) {
-    QueueAction queueAction;
-    for ( int c = 0; c < actions.size(); c++ ) {
-      queueAction = ( QueueAction ) actions.get( c );
+    for ( QueueAction queueAction : actions ) {
       if ( queueAction != null ) {
         if ( queueAction.cookie.cookieString.equals( cookie.cookieString ) ) {
           System.out.println( "QueueAction found!" );
