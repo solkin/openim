@@ -1,7 +1,6 @@
 package com.tomclaw.openim.main;
 
 import java.awt.Component;
-import java.awt.Container;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -15,10 +14,12 @@ public class RegisterFrame extends javax.swing.JDialog {
   private AccountRoot accountRoot;
   private int stepIndex = 0;
   private String[][] fields;
+    private AccountsDialog accountDialog;
 
   /** Creates new form RegisterFrame */
-  public RegisterFrame( java.awt.Frame parent, boolean modal ) {
+  public RegisterFrame( java.awt.Frame parent, boolean modal, AccountsDialog accountDialog ) {
     super( parent, modal );
+    this.accountDialog = accountDialog;
     initComponents();
     setLocationRelativeTo( parent );
     String[] plugins;
@@ -153,10 +154,9 @@ public class RegisterFrame extends javax.swing.JDialog {
       }
       if ( stepIndex == accountRoot.getRegisterStepsCount() ) {
         OpenIM.mainFrame.appendAccountRoot( accountRoot );
-        /** Checking for parent is AccountssDialog **/
-        Container parent = getParent();
-        if ( parent instanceof AccountsDialog ) {
-          ( ( AccountsDialog ) parent ).updateAccounts();
+        /** Checking for accountDialog **/
+        if ( accountDialog != null ) {
+          accountDialog.updateAccounts();
         }
         dispose();
         return;

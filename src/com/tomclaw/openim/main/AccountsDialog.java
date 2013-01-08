@@ -119,7 +119,8 @@ public class AccountsDialog extends javax.swing.JDialog {
 
   public final void updateAccounts() {
     DefaultTableModel model = ( DefaultTableModel ) jTable1.getModel();
-    for ( int c = 0; c < model.getRowCount(); c++ ) {
+    int rowCount = model.getRowCount();
+    for ( int c = 0; c < rowCount; c++ ) {
       model.removeRow( 0 );
     }
     String[] groups = Storage.accounts.listGroups();
@@ -127,6 +128,7 @@ public class AccountsDialog extends javax.swing.JDialog {
       try {
         String type = Storage.accounts.getValue( groups[c], "type" );
         String login = Storage.accounts.getValue( groups[c], "login" );
+        System.out.println( c + ": " + type + " - " + login );
         model.addRow( new String[] { type, login } );
       } catch ( Throwable ex ) {
         System.out.println( ex.getMessage() );
@@ -165,7 +167,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
       jPopupMenu.add( new JMenuItem( new AbstractAction( protocol ) {
         @Override
         public void actionPerformed( ActionEvent ae ) {
-          ( new LoginFrame( OpenIM.mainFrame, protocol ) ).setVisible( true );
+          ( new LoginFrame( OpenIM.mainFrame, protocol, AccountsDialog.this ) ).setVisible( true );
         }
       } ) );
     }
@@ -175,7 +177,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_jButton1ActionPerformed
 
   private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    ( new RegisterFrame( OpenIM.mainFrame, true ) ).setVisible( true );
+    ( new RegisterFrame( OpenIM.mainFrame, true, this ) ).setVisible( true );
   }//GEN-LAST:event_jButton4ActionPerformed
 
   private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
