@@ -1,20 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.tomclaw.openim.main;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTree;
 
 /**
- *
- * @author solkin
+ * Solkin Igor Viktorovich, TomClaw Software, 2003-2013
+ * http://www.tomclaw.com/
+ * @author Solkin
  */
 public class BuddyListRenderer extends JPanel implements javax.swing.tree.TreeCellRenderer {
 
@@ -36,9 +31,9 @@ public class BuddyListRenderer extends JPanel implements javax.swing.tree.TreeCe
   }
 
   @Override
-  public Component getTreeCellRendererComponent(JTree tree,
+  public Component getTreeCellRendererComponent( JTree tree,
           Object value, boolean sel, boolean expanded, boolean leaf,
-          int row, boolean hasFocus) {
+          int row, boolean hasFocus ) {
     if ( hasFocus ) {
       userNickLabel.setForeground( javax.swing.UIManager.getDefaults().getColor( "List.selectionForeground" ) );
       userUserIdLabel.setForeground( javax.swing.UIManager.getDefaults().getColor( "List.selectionForeground" ) );

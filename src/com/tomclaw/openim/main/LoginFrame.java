@@ -1,22 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.tomclaw.openim.main;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.Container;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- *
- * @author solkin
+ * Solkin Igor Viktorovich, TomClaw Software, 2003-2013
+ * http://www.tomclaw.com/
+ * @author Solkin
  */
 public class LoginFrame extends javax.swing.JDialog {
 
@@ -138,6 +132,11 @@ public class LoginFrame extends javax.swing.JDialog {
         }
         accountRoot.setLoginStepFields(fields);
         OpenIM.mainFrame.appendAccountRoot( accountRoot );
+        /** Checking for parent is AccountssDialog **/
+        Container parent = getParent();
+        if ( parent instanceof AccountsDialog ) {
+          ( ( AccountsDialog ) parent ).updateAccounts();
+        }
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

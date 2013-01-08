@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.tomclaw.openim.main;
 
 /**
- *
- * @author solkin
+ * Solkin Igor Viktorovich, TomClaw Software, 2003-2013
+ * http://www.tomclaw.com/
+ * @author Solkin
  */
 public class ChatFrame extends javax.swing.JFrame {
 
@@ -40,7 +37,7 @@ public class ChatFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-  public ChatPanel getChatTab(BuddyItem buddyItem, boolean isSwitchTo) {
+  public ChatPanel getChatTab( BuddyItem buddyItem, boolean isSwitchTo ) {
     ChatPanel chatPanel = null;
     int chatPanelsCount = chatPanels.getTabCount();
     for ( int c = 0; c < chatPanelsCount; c++ ) {
@@ -70,9 +67,9 @@ public class ChatFrame extends javax.swing.JFrame {
     }
   }
 
-  public void updatePanelStatus(int panelIndex) {
+  public void updatePanelStatus( int panelIndex ) {
     ChatPanel chatPanel = ( ChatPanel ) chatPanels.getComponentAt( panelIndex );
-    System.out.println("/".concat( chatPanel.getBuddyItem().getAccountRoot().getType() ).concat( "/res/" ).
+    System.out.println( "/".concat( chatPanel.getBuddyItem().getAccountRoot().getType() ).concat( "/res/" ).
             concat( chatPanel.getBuddyItem().getAccountRoot().getStatusUtil().getStatusValue( chatPanel.getBuddyItem().getStatusId() ) ).
             concat( ".png" ) );
     chatPanels.setIconAt( panelIndex, IconCache.getImage( "/".concat( chatPanel.getBuddyItem().getAccountRoot().getType() ).concat( "/res/" ).
@@ -82,7 +79,6 @@ public class ChatFrame extends javax.swing.JFrame {
 
   public void updateChatPanels() {
     javax.swing.SwingUtilities.invokeLater( new Runnable() {
-
       @Override
       public void run() {
         ChatFrame.this.chatPanels.updateUI();

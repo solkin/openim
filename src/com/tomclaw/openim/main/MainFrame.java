@@ -1,15 +1,14 @@
 package com.tomclaw.openim.main;
 
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
- *
- * @author solkin
+ * Solkin Igor Viktorovich, TomClaw Software, 2003-2013
+ * http://www.tomclaw.com/
+ * @author Solkin
  */
 public class MainFrame extends javax.swing.JFrame {
 
@@ -60,16 +59,52 @@ public class MainFrame extends javax.swing.JFrame {
     updateBuddyList();
   }
 
-  public void appendAccountRoot(AccountRoot accountRoot) {
+  public AccountRoot getAccountRoot( String type, String login ) {
+    for ( int c = 0; c < accountRoots.size(); c++ ) {
+      if ( accountRoots.get( c ).getType().equals( type )
+              && accountRoots.get( c ).getLogin().equals( login ) ) {
+        return accountRoots.get( c );
+      }
+    }
+    return null;
+  }
+
+  public void removeAccountRoot( AccountRoot accountRoot ) {
+    if ( accountRoot != null ) {
+      try {
+        accountRoot.disconnect();
+      } catch ( Throwable ex ) {
+        System.out.println( "Couldn't disconnect" );
+      }
+      try {
+        rootNode.remove( accountRoot );
+      } catch ( Throwable ex ) {
+        System.out.println( "Couldn't remove root node" );
+      }
+      try {
+        for ( int c = 0; c < statusBar.getComponentCount(); c++ ) {
+          if ( ( ( StatusButton ) statusBar.getComponentAtIndex( c ) ).getAccountRoot().equals( accountRoot ) ) {
+            statusBar.remove( c );
+            return;
+          }
+        }
+      } catch ( Throwable ex ) {
+        System.out.println( "Couldn't remove status button" );
+      }
+      updateBuddyList();
+      updateStatusBar();
+    }
+  }
+
+  public void appendAccountRoot( AccountRoot accountRoot ) {
     try {
       String groupName = String.valueOf( System.currentTimeMillis() );
       StatusUtil statusUtil = accountRoot.getStatusUtil();
       HashMap params = accountRoot.getParams();
-      Iterator keys = (params.keySet()).iterator();
-      
+      Iterator keys = ( params.keySet() ).iterator();
       Storage.accounts.addGroup( groupName );
       Storage.accounts.addItem( groupName, "type", accountRoot.getType() );
-      for ( ; keys.hasNext(); ) {
+      while ( keys.hasNext() ) {
         String itemName = ( String ) keys.next();
         String value = ( String ) params.get( itemName );
         Storage.accounts.addItem( groupName, itemName, value );
@@ -93,7 +128,6 @@ public class MainFrame extends javax.swing.JFrame {
 
   public void updateBuddyList() {
     javax.swing.SwingUtilities.invokeLater( new Runnable() {
-
       @Override
       public void run() {
         MainFrame.this.jTree1.updateUI();
@@ -103,7 +137,6 @@ public class MainFrame extends javax.swing.JFrame {
 
   public void updateStatusBar() {
     javax.swing.SwingUtilities.invokeLater( new Runnable() {
-
       @Override
       public void run() {
         MainFrame.this.statusBar.updateUI();
@@ -237,9 +270,7 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
   }//GEN-LAST:event_jButton6ActionPerformed
 
   private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
-
   }//GEN-LAST:event_jTree1MouseClicked
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

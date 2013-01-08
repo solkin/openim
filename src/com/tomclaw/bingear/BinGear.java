@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * Solkin Igor Viktorovich, TomClaw Software, 2003-2012
+ * Solkin Igor Viktorovich, TomClaw Software, 2003-2013
  * http://www.tomclaw.com/
  * @author Solkin
  */
@@ -19,14 +19,14 @@ public class BinGear {
     hashtable = new HashMap();
   }
 
-  public void addGroup(String groupName) throws IncorrectValueException {
+  public void addGroup( String groupName ) throws IncorrectValueException {
     if ( groupName == null ) {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
     hashtable.put( groupName, new HashMap() );
   }
 
-  public void addItem(String groupName, String itemName, String value) throws GroupNotFoundException, IncorrectValueException {
+  public void addItem( String groupName, String itemName, String value ) throws GroupNotFoundException, IncorrectValueException {
     if ( groupName == null || itemName == null ) {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
@@ -37,7 +37,7 @@ public class BinGear {
     }
   }
 
-  public HashMap getGroup(String groupName) throws IncorrectValueException, GroupNotFoundException {
+  public HashMap getGroup( String groupName ) throws IncorrectValueException, GroupNotFoundException {
     if ( groupName == null ) {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
@@ -48,7 +48,7 @@ public class BinGear {
     }
   }
 
-  public String getValue(String groupName, String itemName) throws GroupNotFoundException, IncorrectValueException {
+  public String getValue( String groupName, String itemName ) throws GroupNotFoundException, IncorrectValueException {
     if ( groupName == null || itemName == null ) {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
@@ -59,7 +59,7 @@ public class BinGear {
     }
   }
 
-  public String getValue(String groupName, String itemName, boolean isFullCompare) throws GroupNotFoundException, IncorrectValueException {
+  public String getValue( String groupName, String itemName, boolean isFullCompare ) throws GroupNotFoundException, IncorrectValueException {
     if ( groupName == null || itemName == null ) {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
@@ -67,7 +67,7 @@ public class BinGear {
       return getValue( groupName, itemName );
     } else {
       try {
-        Iterator groupKeys = (hashtable.keySet()).iterator();
+        Iterator groupKeys = ( hashtable.keySet() ).iterator();
         String tempName;
         for ( ; groupKeys.hasNext(); ) {
           tempName = ( String ) groupKeys.next();
@@ -82,7 +82,7 @@ public class BinGear {
     return null;
   }
 
-  public void renameGroup(String groupOldName, String groupNewName) throws IncorrectValueException, GroupNotFoundException {
+  public void renameGroup( String groupOldName, String groupNewName ) throws IncorrectValueException, GroupNotFoundException {
     if ( groupOldName == null || groupNewName == null ) {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
@@ -96,7 +96,7 @@ public class BinGear {
 
   public String[] listGroups() {
     String[] groups = new String[ hashtable.size() ];
-    Iterator groupKeys = (hashtable.keySet()).iterator();
+    Iterator groupKeys = ( hashtable.keySet() ).iterator();
     String groupName;
     for ( int c = 0; groupKeys.hasNext(); c++ ) {
       groupName = ( String ) groupKeys.next();
@@ -105,13 +105,13 @@ public class BinGear {
     return groups;
   }
 
-  public String[] listItems(String groupName) throws IncorrectValueException, GroupNotFoundException {
+  public String[] listItems( String groupName ) throws IncorrectValueException, GroupNotFoundException {
     if ( groupName == null ) {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
     try {
       String[] items = new String[ ( ( HashMap ) hashtable.get( groupName ) ).size() ];
-      Iterator itemKeys = (( ( HashMap ) hashtable.get( groupName ) ).keySet()).iterator();
+      Iterator itemKeys = ( ( ( HashMap ) hashtable.get( groupName ) ).keySet() ).iterator();
       for ( int c = 0; itemKeys.hasNext(); c++ ) {
         groupName = ( String ) itemKeys.next();
         items[c] = groupName;
@@ -122,7 +122,7 @@ public class BinGear {
     }
   }
 
-  public String[] listItems(String groupName, boolean isFullCompare) throws IncorrectValueException, GroupNotFoundException {
+  public String[] listItems( String groupName, boolean isFullCompare ) throws IncorrectValueException, GroupNotFoundException {
     if ( groupName == null ) {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
@@ -150,7 +150,7 @@ public class BinGear {
     }
   }
 
-  public void renameItem(String groupName, String itemOldName, String itemNewName) throws IncorrectValueException, GroupNotFoundException {
+  public void renameItem( String groupName, String itemOldName, String itemNewName ) throws IncorrectValueException, GroupNotFoundException {
     if ( groupName == null || itemOldName == null ) {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
@@ -162,7 +162,7 @@ public class BinGear {
     }
   }
 
-  public void setValue(String groupName, String itemName, String value) throws GroupNotFoundException, IncorrectValueException {
+  public void setValue( String groupName, String itemName, String value ) throws GroupNotFoundException, IncorrectValueException {
     if ( groupName == null || itemName == null ) {
       throw new IncorrectValueException( "nulltype is not allowed here as patameter" );
     }
@@ -173,15 +173,15 @@ public class BinGear {
     }
   }
 
-  public void removeGroup(String groupName) {
+  public void removeGroup( String groupName ) {
     hashtable.remove( groupName );
   }
 
-  public void removeItem(String groupName, String itemName) {
+  public void removeItem( String groupName, String itemName ) {
     ( ( HashMap ) hashtable.get( groupName ) ).remove( itemName );
   }
 
-  public void exportToIni(OutputStream outputStream) throws IOException {
+  public void exportToIni( OutputStream outputStream ) throws IOException {
     Iterator groupKeys = hashtable.keySet().iterator();
     Iterator itemKeys;
     String itemName;
@@ -192,15 +192,15 @@ public class BinGear {
       itemKeys = ( ( HashMap ) hashtable.get( groupName ) ).keySet().iterator();
       for ( ; itemKeys.hasNext(); ) {
         itemName = ( String ) itemKeys.next();
-        outputStream.write( StringUtil.stringToByteArray( itemName.concat( 
-                "=" ).concat( ( String ) ( ( HashMap ) hashtable.get( 
+        outputStream.write( StringUtil.stringToByteArray( itemName.concat(
+                "=" ).concat( ( String ) ( ( HashMap ) hashtable.get(
                 groupName ) ).get( itemName ) ).concat( "\n" ), true ) );
       }
     }
     outputStream.flush();
   }
 
-  public void saveToDat(DataOutputStream outputStream) throws IOException {
+  public void saveToDat( DataOutputStream outputStream ) throws IOException {
     /**
      *   [int] groupsCount
      * г [int] groupNameLength
@@ -247,7 +247,7 @@ public class BinGear {
     outputStream.flush();
   }
 
-  public void readFromDat(DataInputStream inputStream) throws IOException, IncorrectValueException, GroupNotFoundException, EOFException {
+  public void readFromDat( DataInputStream inputStream ) throws IOException, IncorrectValueException, GroupNotFoundException, EOFException {
     /**
      *   [int] groupsCount
      * г [int] groupNameLength
@@ -281,7 +281,7 @@ public class BinGear {
     }
   }
 
-  public void importFromIni(String data) throws IOException, IncorrectValueException, GroupNotFoundException, Throwable {
+  public void importFromIni( String data ) throws IOException, IncorrectValueException, GroupNotFoundException, Throwable {
     hashtable.clear();
     char ch;
     String prevHeader = null;
@@ -319,7 +319,7 @@ public class BinGear {
     }
   }
 
-  public void importFromIni(DataInputStream inputStream) throws IOException, IncorrectValueException, GroupNotFoundException, EOFException, Throwable {
+  public void importFromIni( DataInputStream inputStream ) throws IOException, IncorrectValueException, GroupNotFoundException, EOFException, Throwable {
     hashtable.clear();
     byte ch;
     String prevHeader = null;

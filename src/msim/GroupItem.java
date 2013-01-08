@@ -1,29 +1,25 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package msim;
 
 /**
- *
- * @author i.solkin
+ * Solkin Igor Viktorovich, TomClaw Software, 2003-2013
+ * http://www.tomclaw.com/
+ * @author Solkin
  */
 public class GroupItem extends com.tomclaw.openim.main.GroupItem {
 
-    private String groupName;
-    
-    public GroupItem(String groupName) {
-        this.groupName = groupName;
-    }
-    
-    @Override
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
+  private String groupName;
 
-    @Override
-    public String getGroupName() {
-        return groupName;
-    }
-    
+  public GroupItem( String groupName ) {
+    this.groupName = groupName;
+  }
+
+  @Override
+  public void setGroupName( String groupName ) {
+    this.groupName = groupName;
+  }
+
+  @Override
+  public String getGroupName() {
+    return groupName;
+  }
 }

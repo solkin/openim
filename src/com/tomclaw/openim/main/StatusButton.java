@@ -4,15 +4,14 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 /**
- *
- * @author solkin
+ * Solkin Igor Viktorovich, TomClaw Software, 2003-2013
+ * http://www.tomclaw.com/
+ * @author Solkin
  */
 public class StatusButton extends JButton implements ActionListener {
 
@@ -72,5 +71,9 @@ public class StatusButton extends JButton implements ActionListener {
             "/".concat( accountRoot.getType() ).concat( "/res/" ).
             concat( statusUtil.getStatusValue( accountRoot.getStatusIndex() ) ).
             concat( ".png" ) ) );
+  }
+  
+  public AccountRoot getAccountRoot() {
+    return accountRoot;
   }
 }

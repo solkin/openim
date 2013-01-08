@@ -1,19 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.tomclaw.openim.main;
 
 /**
- *
- * @author solkin
+ * Solkin Igor Viktorovich, TomClaw Software, 2003-2013
+ * http://www.tomclaw.com/
+ * @author Solkin
  */
 public class ChatPanel extends javax.swing.JPanel {
 
   private final BuddyItem buddyItem;
 
   /** Creates new form ChatPanel */
-  public ChatPanel(BuddyItem buddyItem) {
+  public ChatPanel( BuddyItem buddyItem ) {
     this.buddyItem = buddyItem;
     initComponents();
   }
@@ -111,7 +108,7 @@ public class ChatPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-  public void addChatItem(String message, boolean isIncoming) {
+  public void addChatItem( String message, boolean isIncoming ) {
     jTextPane2.setText( jTextPane2.getText() + "[" + ( isIncoming ? buddyItem.getNickName() : "ß" ) + "]\n"
             + message + "\n" );
   }

@@ -9,13 +9,10 @@ import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
- *
- * @author solkin
+ * Solkin Igor Viktorovich, TomClaw Software, 2003-2013
+ * http://www.tomclaw.com/
+ * @author Solkin
  */
 public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNode {
 
@@ -40,16 +37,16 @@ public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNod
 
   public abstract String getType();
 
-  public abstract void setHandler(Handler handler);
+  public abstract void setHandler( Handler handler );
 
   public abstract StatusUtil getStatusUtil();
 
   /** Settings **/
-  public abstract void setLogin(String login);
+  public abstract void setLogin( String login );
 
-  public abstract void setPassword(String password);
+  public abstract void setPassword( String password );
 
-  public abstract void setHostPort(String hostPort);
+  public abstract void setHostPort( String hostPort );
 
   public abstract String getLogin();
 
@@ -58,52 +55,52 @@ public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNod
   public abstract String getHostPort();
 
   /** Serializing **/
-  public abstract void setParams(HashMap params);
+  public abstract void setParams( HashMap params );
 
   public abstract HashMap getParams();
 
   /** Actions **/
-  public abstract GroupItem getGroupInstance(String groupName);
+  public abstract GroupItem getGroupInstance( String groupName );
 
-  public abstract BuddyItem getBuddyInstance(String userId, String nickName);
+  public abstract BuddyItem getBuddyInstance( String userId, String nickName );
 
-  public abstract void connect(int statusIndex) throws IOException, LoginFailedException;
+  public abstract void connect( int statusIndex ) throws IOException, LoginFailedException;
 
   public abstract void disconnect() throws IOException;
 
-  public abstract Cookie sendMessage(BuddyItem buddyItem, String message) throws IOException;
+  public abstract Cookie sendMessage( BuddyItem buddyItem, String message ) throws IOException;
 
-  public abstract Cookie removeItem(BuddyItem buddyItem) throws IOException;
+  public abstract Cookie removeItem( BuddyItem buddyItem ) throws IOException;
 
-  public abstract Cookie renameItem(BuddyItem buddyItem, String nickName) throws IOException;
+  public abstract Cookie renameItem( BuddyItem buddyItem, String nickName ) throws IOException;
 
-  public abstract Cookie removeGroup(GroupItem groupItem) throws IOException;
+  public abstract Cookie removeGroup( GroupItem groupItem ) throws IOException;
 
-  public abstract Cookie renameGroup(GroupItem groupItem, String nickName) throws IOException;
+  public abstract Cookie renameGroup( GroupItem groupItem, String nickName ) throws IOException;
 
-  public abstract void setStatusIndex(int statusIndex) throws IOException;
+  public abstract void setStatusIndex( int statusIndex ) throws IOException;
 
   public abstract int getStatusIndex();
 
   public abstract int getRegisterStepsCount();
 
-  public abstract String[][] getRegisterFields(int stepIndex) throws IOException;
-  
+  public abstract String[][] getRegisterFields( int stepIndex ) throws IOException;
+
   public abstract String[][] getLoginFields();
 
-  public abstract void setRegisterStepFields(int stepIndex, String[][] params) throws IOException, InvalidFormException;
-  
-  public abstract void setLoginStepFields(String[][] params);
+  public abstract void setRegisterStepFields( int stepIndex, String[][] params ) throws IOException, InvalidFormException;
+
+  public abstract void setLoginStepFields( String[][] params );
 
   /** Queue stack **/
-  public abstract void pushQueue(QueueAction queueAction);
+  public abstract void pushQueue( QueueAction queueAction );
 
-  public abstract void runQueue(Cookie cookie, HashMap params);
+  public abstract void runQueue( Cookie cookie, HashMap params );
 
-  public abstract QueueAction popQueue(Cookie cookie);
+  public abstract QueueAction popQueue( Cookie cookie );
 
   /** Platform dependent **/
-  public BuddyItem getBuddyItem(String userId) {
+  public BuddyItem getBuddyItem( String userId ) {
     int groupsCount = getChildCount();
     for ( int c = 0; c < groupsCount; c++ ) {
       GroupItem groupItem = ( GroupItem ) getChildAt( c );
@@ -124,7 +121,7 @@ public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNod
     return buddyItem;
   }
 
-  public void setStatusButton(StatusButton statusButton) {
+  public void setStatusButton( StatusButton statusButton ) {
     this.statusButton = statusButton;
   }
 
@@ -138,9 +135,8 @@ public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNod
     if ( caps[CAP_SEND_MSG] ) {
       JMenuItem menuItem = new JMenuItem( "Открыть диалог", IconCache.getImage( "/res/mail-mark-read.png" ) );
       menuItem.addActionListener( new ActionListener() {
-
         @Override
-        public void actionPerformed(ActionEvent ae) {
+        public void actionPerformed( ActionEvent ae ) {
           System.out.println( "CAP_SEND_MSG" );
           OpenIM.chatFrame.getChatTab( OpenIM.mainFrame.selectedBuddyItem, true );
           OpenIM.chatFrame.setVisible( true );
@@ -151,17 +147,15 @@ public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNod
     if ( caps[CAP_REMB_ITM] ) {
       JMenuItem menuItem = new JMenuItem( "Удалить контакт", IconCache.getImage( "/res/list-remove.png" ) );
       menuItem.addActionListener( new ActionListener() {
-
         @Override
-        public void actionPerformed(ActionEvent ae) {
+        public void actionPerformed( ActionEvent ae ) {
           int result = javax.swing.JOptionPane.showConfirmDialog( null, "Вы действительно хотите удалить контакт?", "Удаление контакта", javax.swing.JOptionPane.YES_NO_OPTION );
           if ( result == javax.swing.JOptionPane.YES_OPTION ) {
             try {
               Cookie cookie = removeItem( OpenIM.mainFrame.selectedBuddyItem );
               QueueAction action = new QueueAction( AccountRoot.this, OpenIM.mainFrame.selectedBuddyItem, cookie ) {
-
                 @Override
-                public void actionPerformed(HashMap params) {
+                public void actionPerformed( HashMap params ) {
                   System.out.println( "Removing buddy" );
                   GroupItem groupItem = OpenIM.mainFrame.selectedBuddyItem.getParentGroup();
                   groupItem.remove( OpenIM.mainFrame.selectedBuddyItem );
@@ -180,17 +174,15 @@ public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNod
     if ( caps[CAP_RENB_ITM] ) {
       JMenuItem menuItem = new JMenuItem( "Переименовать контакт", IconCache.getImage( "/res/gtk-edit.png" ) );
       menuItem.addActionListener( new ActionListener() {
-
         @Override
-        public void actionPerformed(ActionEvent ae) {
+        public void actionPerformed( ActionEvent ae ) {
           final String result = javax.swing.JOptionPane.showInputDialog( null, "Введите новый ник контакта", "Переименование контакта", javax.swing.JOptionPane.OK_CANCEL_OPTION );
           if ( result != null ) {
             try {
               Cookie cookie = renameItem( OpenIM.mainFrame.selectedBuddyItem, result );
               QueueAction action = new QueueAction( AccountRoot.this, OpenIM.mainFrame.selectedBuddyItem, cookie ) {
-
                 @Override
-                public void actionPerformed(HashMap params) {
+                public void actionPerformed( HashMap params ) {
                   System.out.println( "Renaming buddy" );
                   OpenIM.mainFrame.selectedBuddyItem.setNickName( result );
                   OpenIM.mainFrame.updateBuddyList();
@@ -213,18 +205,16 @@ public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNod
     if ( caps[CAP_REMG_ITM] ) {
       JMenuItem menuItem = new JMenuItem( "Удалить группу", IconCache.getImage( "/res/list-remove.png" ) );
       menuItem.addActionListener( new ActionListener() {
-
         @Override
-        public void actionPerformed(ActionEvent ae) {
+        public void actionPerformed( ActionEvent ae ) {
           System.out.println( "CAP_REMG_ITM" );
           int result = javax.swing.JOptionPane.showConfirmDialog( null, "Вы действительно хотите удалить группу и все вложенные в неё контакты?", "Удаление группы", javax.swing.JOptionPane.YES_NO_OPTION );
           if ( result == javax.swing.JOptionPane.YES_OPTION ) {
             try {
               Cookie cookie = removeGroup( OpenIM.mainFrame.selectedGroupItem );
               QueueAction action = new QueueAction( AccountRoot.this, OpenIM.mainFrame.selectedGroupItem, cookie ) {
-
                 @Override
-                public void actionPerformed(HashMap params) {
+                public void actionPerformed( HashMap params ) {
                   System.out.println( "Removing buddy" );
                   remove( OpenIM.mainFrame.selectedGroupItem );
                   OpenIM.mainFrame.updateBuddyList();
@@ -242,18 +232,16 @@ public abstract class AccountRoot extends javax.swing.tree.DefaultMutableTreeNod
     if ( caps[CAP_RENG_ITM] ) {
       JMenuItem menuItem = new JMenuItem( "Переименовать группу", IconCache.getImage( "/res/gtk-edit.png" ) );
       menuItem.addActionListener( new ActionListener() {
-
         @Override
-        public void actionPerformed(ActionEvent ae) {
+        public void actionPerformed( ActionEvent ae ) {
           System.out.println( "CAP_RENG_ITM" );
           final String result = javax.swing.JOptionPane.showInputDialog( null, "Введите новое название группы", "Переименование группы", javax.swing.JOptionPane.OK_CANCEL_OPTION );
           if ( result != null ) {
             try {
               Cookie cookie = renameGroup( OpenIM.mainFrame.selectedGroupItem, result );
               QueueAction action = new QueueAction( AccountRoot.this, OpenIM.mainFrame.selectedGroupItem, cookie ) {
-
                 @Override
-                public void actionPerformed(HashMap params) {
+                public void actionPerformed( HashMap params ) {
                   System.out.println( "Renaming group" );
                   OpenIM.mainFrame.selectedGroupItem.setGroupName( result );
                   OpenIM.mainFrame.updateBuddyList();

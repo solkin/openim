@@ -1,26 +1,26 @@
 package com.tomclaw.bingear;
 
 /**
- * Solkin Igor Viktorovich, TomClaw Software, 2003-2012
+ * Solkin Igor Viktorovich, TomClaw Software, 2003-2013
  * http://www.tomclaw.com/
  * @author Solkin
  */
 public class IncorrectValueException extends Throwable {
 
-    /**
-     * Constructs a <code>IncorrectValueException</code> with no detail message.
-     */
-    public IncorrectValueException() {
-        super();
-    }
+  /**
+   * Constructs a <code>IncorrectValueException</code> with no detail message.
+   */
+  public IncorrectValueException() {
+    super();
+  }
 
-    /**
-     * Constructs a <code>IncorrectValueException</code> with the specified
-     * detail message.
-     *
-     * @param   s   the detail message.
-     */
-    public IncorrectValueException(String s) {
-        super(s);
-    }
+  /**
+   * Constructs a <code>IncorrectValueException</code> with the specified
+   * detail message.
+   *
+   * @param   s   the detail message.
+   */
+  public IncorrectValueException( String s ) {
+    super( s );
+  }
 }

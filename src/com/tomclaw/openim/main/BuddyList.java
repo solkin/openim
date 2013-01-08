@@ -1,15 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.tomclaw.openim.main;
 
 import javax.swing.JTree;
 
 /**
- * Класс расширение дерева для работы с 
- * учётными записями и списками контактов
- * @author solkin
+ * Solkin Igor Viktorovich, TomClaw Software, 2003-2013
+ * http://www.tomclaw.com/
+ * @author Solkin
  */
 public class BuddyList extends JTree {
 

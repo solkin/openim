@@ -1,21 +1,18 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.tomclaw.openim.main;
 
 import java.util.HashMap;
 import javax.swing.Icon;
 
 /**
- *
- * @author solkin
+ * Solkin Igor Viktorovich, TomClaw Software, 2003-2013
+ * http://www.tomclaw.com/
+ * @author Solkin
  */
 public class IconCache {
 
   private static HashMap<String, Icon> icons = new HashMap();
 
-  public static Icon getImage(String path) {
+  public static Icon getImage( String path ) {
     if ( icons.containsKey( path ) ) {
       return icons.get( path );
     }

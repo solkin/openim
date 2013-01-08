@@ -5,12 +5,13 @@ import java.io.IOException;
 import java.util.HashMap;
 
 /**
- *
- * @author solkin
+ * Solkin Igor Viktorovich, TomClaw Software, 2003-2013
+ * http://www.tomclaw.com/
+ * @author Solkin
  */
 public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
 
-  private final boolean[] caps = new boolean[]{ true, true, true, true, true, true, true, true, true, true };
+  private final boolean[] caps = new boolean[] { true, true, true, true, true, true, true, true, true, true };
   private String login;
   private String password;
   private String host;
@@ -23,17 +24,17 @@ public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
   private Queue queue = new Queue();
 
   @Override
-  public void setHandler(Handler handler) {
+  public void setHandler( Handler handler ) {
     this.handler = handler;
   }
 
   @Override
   public boolean[] getCaps() {
-    return caps; 
+    return caps;
   }
-  
+
   @Override
-  public void setParams(HashMap params) {
+  public void setParams( HashMap params ) {
     login = ( String ) ( params.get( "login" ) );
     password = ( String ) params.get( "password" );
     host = ( String ) params.get( "host" );
@@ -51,12 +52,12 @@ public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
   }
 
   @Override
-  public void setLogin(String login) {
+  public void setLogin( String login ) {
     this.login = login;
   }
 
   @Override
-  public void setPassword(String password) {
+  public void setPassword( String password ) {
     this.password = password;
   }
 
@@ -80,7 +81,7 @@ public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
   }
 
   @Override
-  public void connect(int statusIndex) throws IOException, LoginFailedException {
+  public void connect( int statusIndex ) throws IOException, LoginFailedException {
     if ( connection != null ) {
       disconnect();
     }
@@ -114,32 +115,32 @@ public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
   }
 
   @Override
-  public Cookie sendMessage(com.tomclaw.openim.main.BuddyItem buddyItem, String message) throws IOException {
+  public Cookie sendMessage( com.tomclaw.openim.main.BuddyItem buddyItem, String message ) throws IOException {
     return session.sendPacket( PacketBase.sendMessage( buddyItem.getUserId(), message ) );
   }
 
   @Override
-  public Cookie removeItem(com.tomclaw.openim.main.BuddyItem buddyItem) throws IOException {
+  public Cookie removeItem( com.tomclaw.openim.main.BuddyItem buddyItem ) throws IOException {
     return session.sendPacket( PacketBase.removeBuddyItem( buddyItem.getUserId() ) );
   }
 
   @Override
-  public Cookie renameItem(com.tomclaw.openim.main.BuddyItem buddyItem, String nickName) throws IOException {
+  public Cookie renameItem( com.tomclaw.openim.main.BuddyItem buddyItem, String nickName ) throws IOException {
     return session.sendPacket( PacketBase.renameBuddyItem( buddyItem.getUserId(), nickName ) );
   }
 
   @Override
-  public Cookie removeGroup(com.tomclaw.openim.main.GroupItem groupItem) throws IOException {
+  public Cookie removeGroup( com.tomclaw.openim.main.GroupItem groupItem ) throws IOException {
     return session.sendPacket( PacketBase.removeGroup( groupItem.getGroupName() ) );
   }
 
   @Override
-  public Cookie renameGroup(com.tomclaw.openim.main.GroupItem groupItem, String nickName) throws IOException {
+  public Cookie renameGroup( com.tomclaw.openim.main.GroupItem groupItem, String nickName ) throws IOException {
     return session.sendPacket( PacketBase.renameGroup( groupItem.getGroupName(), nickName ) );
   }
 
   @Override
-  public void setHostPort(String host) {
+  public void setHostPort( String host ) {
     this.host = host.substring( 0, host.indexOf( ':' ) );
     this.port = Integer.parseInt( host.substring( host.indexOf( ':' ) + 1 ) );
   }
@@ -155,7 +156,7 @@ public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
   }
 
   @Override
-  public void setStatusIndex(int statusIndex) throws IOException {
+  public void setStatusIndex( int statusIndex ) throws IOException {
     this.statusIndex = statusIndex;
   }
 
@@ -170,26 +171,26 @@ public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
   }
 
   @Override
-  public String[][] getRegisterFields(int stepIndex) throws IOException {
+  public String[][] getRegisterFields( int stepIndex ) throws IOException {
     String[][] params = new String[ 6 ][ 2 ];
-    params[0] = new String[]{ "label", "¬ведите сервер дл€ регистрации:" };
-    params[1] = new String[]{ "field", "localhost" };
-    params[2] = new String[]{ "label", "¬ведите желаемый ник:" };
-    params[3] = new String[]{ "field", System.getProperty( "user.name" ) };
-    params[4] = new String[]{ "label", "¬ведите желаемый пароль:" };
-    params[5] = new String[]{ "field", "112" };
+    params[0] = new String[] { "label", "¬ведите сервер дл€ регистрации:" };
+    params[1] = new String[] { "field", "localhost" };
+    params[2] = new String[] { "label", "¬ведите желаемый ник:" };
+    params[3] = new String[] { "field", System.getProperty( "user.name" ) };
+    params[4] = new String[] { "label", "¬ведите желаемый пароль:" };
+    params[5] = new String[] { "field", "112" };
     return params;
   }
-  
+
   @Override
   public String[][] getLoginFields() {
     String[][] params = new String[ 6 ][ 2 ];
-    params[0] = new String[]{ "label", "¬ведите сервер, где зарегистрирована yчЄтна€ запись:" };
-    params[1] = new String[]{ "field", "localhost" };
-    params[2] = new String[]{ "label", "¬ведите ник:" };
-    params[3] = new String[]{ "field", System.getProperty( "user.name" ) };
-    params[4] = new String[]{ "label", "¬ведите пароль:" };
-    params[5] = new String[]{ "field", "112" };
+    params[0] = new String[] { "label", "¬ведите сервер, где зарегистрирована yчЄтна€ запись:" };
+    params[1] = new String[] { "field", "localhost" };
+    params[2] = new String[] { "label", "¬ведите ник:" };
+    params[3] = new String[] { "field", System.getProperty( "user.name" ) };
+    params[4] = new String[] { "label", "¬ведите пароль:" };
+    params[5] = new String[] { "field", "112" };
     return params;
   }
 
@@ -199,7 +200,7 @@ public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
   }
 
   @Override
-  public void setRegisterStepFields(int stepIndex, String[][] params) throws IOException, InvalidFormException {
+  public void setRegisterStepFields( int stepIndex, String[][] params ) throws IOException, InvalidFormException {
     host = params[1][1];
     login = params[3][1];
     password = params[5][1];
@@ -210,35 +211,35 @@ public class AccountRoot extends com.tomclaw.openim.main.AccountRoot {
       throw new InvalidFormException();
     }
   }
-  
-  public void setLoginStepFields(String[][] params) {
+
+  public void setLoginStepFields( String[][] params ) {
     host = params[1][1];
     login = params[3][1];
     password = params[5][1];
   }
 
   @Override
-  public void pushQueue(QueueAction queueAction) {
+  public void pushQueue( QueueAction queueAction ) {
     queue.pushQueueAction( queueAction );
   }
 
   @Override
-  public void runQueue(Cookie cookie, HashMap params) {
+  public void runQueue( Cookie cookie, HashMap params ) {
     queue.runQueueAction( cookie, params );
   }
 
   @Override
-  public QueueAction popQueue(Cookie cookie) {
+  public QueueAction popQueue( Cookie cookie ) {
     return queue.popQueueAction( cookie );
   }
 
   @Override
-  public GroupItem getGroupInstance(String groupName) {
+  public GroupItem getGroupInstance( String groupName ) {
     return new GroupItem( groupName );
   }
 
   @Override
-  public BuddyItem getBuddyInstance(String userId, String nickName) {
-    return new BuddyItem(userId, nickName);
+  public BuddyItem getBuddyInstance( String userId, String nickName ) {
+    return new BuddyItem( userId, nickName );
   }
 }

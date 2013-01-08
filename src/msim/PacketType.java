@@ -1,8 +1,9 @@
 package msim;
 
 /**
- *
- * @author i.solkin
+ * Solkin Igor Viktorovich, TomClaw Software, 2003-2013
+ * http://www.tomclaw.com/
+ * @author Solkin
  */
 public final class PacketType {
 
@@ -14,7 +15,7 @@ public final class PacketType {
   public static final String TYPE_FAIL = "fail";
   public static final String TYPE_PING = "ping";
   public static final String TYPE_PRESENCE = "presence";
-  /** Operations **/ 
+  /** Operations **/
   public static final String OPER_REGISTER = "register";
   public static final String OPER_AUTH = "auth";
   public static final String OPER_MESSAGE = "message";

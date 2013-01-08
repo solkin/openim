@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package msim;
 
 /**
- *
- * @author solkin
+ * Solkin Igor Viktorovich, TomClaw Software, 2003-2013
+ * http://www.tomclaw.com/
+ * @author Solkin
  */
 public class BuddyItem extends com.tomclaw.openim.main.BuddyItem {
 
@@ -14,13 +11,13 @@ public class BuddyItem extends com.tomclaw.openim.main.BuddyItem {
   private String userId = "";
   private int statusId = 0;
 
-  public BuddyItem(String userId, String nickName) {
+  public BuddyItem( String userId, String nickName ) {
     this.userId = userId;
     this.nickName = nickName;
   }
 
   @Override
-  public void setNickName(String nickName) {
+  public void setNickName( String nickName ) {
     this.nickName = nickName;
   }
 
@@ -30,7 +27,7 @@ public class BuddyItem extends com.tomclaw.openim.main.BuddyItem {
   }
 
   @Override
-  public void setUserId(String userId) {
+  public void setUserId( String userId ) {
     this.userId = userId;
   }
 
@@ -40,7 +37,7 @@ public class BuddyItem extends com.tomclaw.openim.main.BuddyItem {
   }
 
   @Override
-  public void setStatusId(int statusId) {
+  public void setStatusId( int statusId ) {
     this.statusId = statusId;
   }
 
